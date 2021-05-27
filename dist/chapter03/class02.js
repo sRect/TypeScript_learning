@@ -19,6 +19,16 @@ var FPerson = /** @class */ (function () {
         this.fav = ["girl", 'game'];
         this.newName = 'Bob';
     }
+    Object.defineProperty(FPerson.prototype, "favStr", {
+        get: function () {
+            return this.fav.join(',');
+        },
+        set: function (val) {
+            this.fav.push(val);
+        },
+        enumerable: false,
+        configurable: true
+    });
     FPerson.prototype.sayHello = function () {
         console.log("name: " + this.newName);
     };
@@ -41,5 +51,29 @@ var HPerson = /** @class */ (function (_super) {
     return HPerson;
 }(FPerson));
 var hPerson = new HPerson();
+var TPerson = /** @class */ (function (_super) {
+    __extends(TPerson, _super);
+    function TPerson(xx, yy) {
+        var _this = _super.call(this) || this;
+        _this.xx = xx;
+        _this.yy = yy;
+        _this.xx = xx;
+        _this.yy = yy;
+        return _this;
+    }
+    TPerson.prototype.logXXYY = function () {
+        console.log("xx: " + this.xx + ", yy: " + this.yy);
+    };
+    return TPerson;
+}(FPerson));
+var tPerson = new TPerson('hh', 'cc');
+tPerson.logXXYY();
+tPerson.sayHello();
+console.log("static aboutName: " + HPerson.aboutName);
 console.log(hPerson.sayLove());
 console.log(hPerson.sayHello());
+console.log("fav: " + hPerson.favStr);
+hPerson.favStr = 'hello';
+// hPerson.newName = 'hhh';
+console.log(hPerson);
+console.log(fPerson);
