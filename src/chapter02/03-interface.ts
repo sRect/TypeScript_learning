@@ -36,3 +36,42 @@ re = fav as boolean[];
 console.log(re)
 
 // 额外的属性检查
+interface SquareConfig {
+  color?: string;
+  width?: number;
+  [propName: string]: any; // 添加字符串签名索引
+}
+
+function printSquare(conf: SquareConfig): void {
+  console.log(`color: ${conf?.color}, width: ${conf?.width}`);
+}
+
+printSquare({
+  colour: 'red', // 这里故意拼错
+  width: 30
+});
+
+// 交叉类型
+interface CircleConf1 {
+  color?: string
+}
+
+interface CircleConf2 {
+  radius: number,
+  getArea: () => number
+}
+
+// conf 参数可以访问类型 CircleConf1 和 CircleConf2 所有属性
+function getCircle(conf: CircleConf1 & CircleConf2):void {
+  const color = conf.color || 'red';
+  const radius = conf.radius || 40;
+
+  conf.getArea = (): number => Math.PI * Math.pow(radius, 2);
+  // conf.color = 'red';
+  // conf.radius = 30;
+  // conf.getArea = ():number => Math.PI * Math.pow(conf.radius, 2);
+
+  console.log(`circle: area=>${conf.getArea()}, color: ${color}`);
+};
+
+getCircle({ radius: 40, getArea: () => 1 });

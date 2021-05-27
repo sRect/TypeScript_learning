@@ -20,4 +20,22 @@ var re = [];
 // 但是可以通过类型断言重写
 re = fav;
 console.log(re);
-// 额外的属性检查
+function printSquare(conf) {
+    console.log("color: " + (conf === null || conf === void 0 ? void 0 : conf.color) + ", width: " + (conf === null || conf === void 0 ? void 0 : conf.width));
+}
+printSquare({
+    colour: 'red',
+    width: 30
+});
+// conf 参数可以访问类型 CircleConf1 和 CircleConf2 所有属性
+function getCircle(conf) {
+    var color = conf.color || 'red';
+    var radius = conf.radius || 40;
+    conf.getArea = function () { return Math.PI * Math.pow(radius, 2); };
+    // conf.color = 'red';
+    // conf.radius = 30;
+    // conf.getArea = ():number => Math.PI * Math.pow(conf.radius, 2);
+    console.log("circle: area=>" + conf.getArea() + ", color: " + color);
+}
+;
+getCircle({ radius: 40, getArea: function () { return 1; } });
