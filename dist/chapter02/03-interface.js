@@ -20,3 +20,4 @@ var re = [];
 // 但是可以通过类型断言重写
 re = fav;
 console.log(re);
+// 额外的属性检查
