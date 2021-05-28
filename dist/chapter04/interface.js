@@ -22,7 +22,7 @@ var Human = /** @class */ (function () {
     };
     return Human;
 }());
-var human = new Human('jack', 100);
+var human = new Human('jack', 1, 18);
 human.sayHello();
 human.sayName();
 human.sayAge();
